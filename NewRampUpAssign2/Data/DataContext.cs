@@ -29,12 +29,11 @@ namespace NewRampUpAssign2.Models
             modelBuilder.Entity<Employee>(entity =>
             {
                 entity.ToTable("Employee");
-                entity.Property(e => e.EmployeeID).HasColumnName("EmployeeID");
-                entity.Property(e => e.EmployeeName).HasMaxLength(100).IsUnicode(false);
-                entity.Property(e => e.JobTitle).HasMaxLength(50).IsUnicode(false);
+                entity.Property(e => e.Id).HasColumnName("Id");
+                entity.Property(e => e.Name).HasMaxLength(100).IsUnicode(false);
                 entity.Property(e => e.Gender).HasMaxLength(1).IsUnicode(false);
                 entity.Property(e => e.City).HasMaxLength(20).IsUnicode(false);
-                entity.Property(e => e.Mobile_no).HasMaxLength(10).IsUnicode(false);
+                entity.Property(e => e.Email).HasMaxLength(30).IsUnicode(false);
 
             });
 

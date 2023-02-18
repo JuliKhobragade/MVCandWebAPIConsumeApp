@@ -4,20 +4,21 @@ namespace NewRampUpAssign2.Models
 {
     public class EmpData
     {
-        [Required]
-        public int EmployeeID { get; set; }
-        [Required]
-        public string? EmployeeName { get; set; }
-        [Required]
-        public string? JobTitle { get; set; }
-        [Required]
-        public string? Gender { get; set; }
-        [Required]
-        public string? City { get; set; }
-        [Required]
-        [StringLength(10)]
-        public string? Mobile_no { get; set; }
-        [Required]
-        public string? Email { get; set; }
+        public int Id { get; set; }
+        [Required(ErrorMessage = "Please enter Name")]
+        public string Name { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = "Please enter Gender")]
+        [Display(Name = "Gender(M or F)")]
+        [StringLength(1)]
+        public string Gender { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = "Please enter City")]
+        public string City { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = "Please enter Email")]
+        [DataType(DataType.EmailAddress)]
+        public string Email { get; set; } = string.Empty;
+
     }
 }

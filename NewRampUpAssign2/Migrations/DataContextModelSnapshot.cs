@@ -40,12 +40,12 @@ namespace NewRampUpAssign2.Migrations
 
             modelBuilder.Entity("NewRampUpAssign2.Models.Employee", b =>
                 {
-                    b.Property<int>("EmployeeID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("EmployeeID");
+                        .HasColumnName("Id");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EmployeeID"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("City")
                         .IsRequired()
@@ -55,13 +55,9 @@ namespace NewRampUpAssign2.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EmployeeName")
-                        .IsRequired()
-                        .HasMaxLength(100)
+                        .HasMaxLength(30)
                         .IsUnicode(false)
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("varchar(30)");
 
                     b.Property<string>("Gender")
                         .IsRequired()
@@ -69,19 +65,13 @@ namespace NewRampUpAssign2.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(1)");
 
-                    b.Property<string>("JobTitle")
+                    b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(50)
+                        .HasMaxLength(100)
                         .IsUnicode(false)
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("varchar(100)");
 
-                    b.Property<string>("Mobile_no")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(10)");
-
-                    b.HasKey("EmployeeID");
+                    b.HasKey("Id");
 
                     b.ToTable("Employee", (string)null);
                 });

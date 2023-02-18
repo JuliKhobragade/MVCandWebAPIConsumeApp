@@ -17,11 +17,11 @@ namespace NewRampUpAssign2.Repository
          
         }
 
-        public List<Employee> GetEmployeeDetails()
+        public Task<List<Employee>>GetEmployeeDetails()
         {
             try
             {
-                return _dbContext.Employees.ToList();
+                return Task.FromResult(_dbContext.Employees.ToList());
             }
             catch
             {
@@ -29,14 +29,14 @@ namespace NewRampUpAssign2.Repository
             }
         }
 
-        public Employee GetEmployeeDetails(int id)
+        public Task<Employee> GetEmployeeDetails(int id)
         {
             try
             {
                 Employee? employee = _dbContext.Employees.Find(id);
                 if (employee != null)
                 {
-                    return employee;
+                    return Task.FromResult(employee);
                 }
                 else
                 {
@@ -49,25 +49,29 @@ namespace NewRampUpAssign2.Repository
             }
         }
 
-        public void AddEmployee(Employee employee)
+        public Task<Employee> AddEmployee(Employee employee)
         {
             try
             {
                 _dbContext.Employees.Add(employee);
                 _dbContext.SaveChanges();
+                return Task.FromResult(employee);
             }
             catch
             {
-                throw;
+                throw ;
             }
         }
 
-        public async Task UpdateEmployee(Employee employee)
+        public Task<Employee> UpdateEmployee(Employee employee)
         {
             try
             {
                 _dbContext.Entry(employee).State = EntityState.Modified;
                 _dbContext.SaveChanges();
+                return Task.FromResult(employee);
+
+
             }
             catch
             {
@@ -75,7 +79,7 @@ namespace NewRampUpAssign2.Repository
             }
         }
 
-        public Employee DeleteEmployee(int id)
+        public Task<Employee> DeleteEmployee(int id)
         {
             try
             {
@@ -85,7 +89,7 @@ namespace NewRampUpAssign2.Repository
                 {
                     _dbContext.Employees.Remove(employee);
                     _dbContext.SaveChanges();
-                    return employee;
+                    return Task.FromResult(employee);
                 }
                 else
                 {
@@ -98,6 +102,6 @@ namespace NewRampUpAssign2.Repository
             }
         }
 
-
+      
     }
 }

@@ -1,0 +1,31 @@
+﻿@model MVCnWEBAPI.Models.EmpInfo
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h4>Login Page</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="LoginUser" asp-controller="Token">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <table border="0" cellpadding="2" cellspacing="2">
+                <tr>
+                    <td>Email</td>
+                    <td><input type="text" name="Email"></td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td><input type="password" name="Password"></td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td><input type="submit" value="Login"></td>
+                </tr>
+            </table>
+            <label>@Html.Raw(ViewBag.Message)</label>
+        </form>
+    </div>
+</div>
+

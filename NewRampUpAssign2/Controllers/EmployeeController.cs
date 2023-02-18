@@ -8,7 +8,7 @@ using NewRampUpAssign2.Models;
 
 namespace NewRampUpAssign2.Controllers
 {
-    
+    [Authorize]
     [Route("api/employee")]
     [ApiController]
     public class EmployeeController : ControllerBase
@@ -23,13 +23,13 @@ namespace NewRampUpAssign2.Controllers
         }
 
         // GET: api/employee>
-        [Authorize]
+       
         [HttpGet]
-        public ActionResult<List<EmpData>> GetEmployeeDetails()
+        public async Task<ActionResult<List<EmpData>>> GetEmployeeDetails()
         {
 /*             var employee= await Task.FromResult(_IEmployee.GetEmployeeDetails());
 */
-            var employees =  _IEmployee.GetEmployeeDetails();
+            var employees = await _IEmployee.GetEmployeeDetails();
             var records = _mapper.Map<List<EmpData>>(employees);
             return Ok(records);
 
@@ -37,11 +37,11 @@ namespace NewRampUpAssign2.Controllers
         }
 
         // GET api/employee/
-        [Authorize]
+
         [HttpGet("{id}")]
         public async Task<ActionResult<EmpData>> GetEmployeeDetails(int id)
         {
-            var employees = await Task.FromResult(_IEmployee.GetEmployeeDetails(id));
+            var employees = await _IEmployee.GetEmployeeDetails(id);
             if (employees == null)
             {
                  return NotFound();
@@ -56,18 +56,18 @@ namespace NewRampUpAssign2.Controllers
         public async Task<ActionResult<Employee>> Post(EmpData empData)
         {
             var employee = _mapper.Map<Employee>(empData);
-            _IEmployee.AddEmployee(employee);
-            return await Task.FromResult(employee);
+            await _IEmployee.AddEmployee(employee);
+            return employee;
         }
 
         // PUT api/employee/
-        [Authorize]
+     
         [HttpPut]
         public async Task<IActionResult> UpdateEmployee(EmpData empData)
         {
-            int empId = empData.EmployeeID;
+            int empId = empData.Id;
 
-            var records = await Task.FromResult(_IEmployee.GetEmployeeDetails(empId));
+            var records = await _IEmployee.GetEmployeeDetails(empId);
 
             if (records == null)
             {
@@ -88,18 +88,13 @@ namespace NewRampUpAssign2.Controllers
             return Ok("Employee Details Updated");
         }
 
-        // DELETE api/employee/
-        [Authorize]
+      
+     
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Employee>> Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            var employee = _IEmployee.DeleteEmployee(id);
-            return Ok("Employee Data Deleted");
+            await _IEmployee.DeleteEmployee(id);
+            return Ok("Employee Deleted");
         }
-
-      /*  private bool EmployeeExists(int id)
-        {
-            return _IEmployee.CheckEmployee(id);
-        }*/
     }
 }
